@@ -80,7 +80,7 @@ class Rate(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="用户")
-    content = models.CharField(max_length=64, verbose_name="内容")
+    content = models.TextField(verbose_name="内容")
     create_time = models.DateTimeField(auto_now_add=True)
     good = models.IntegerField(verbose_name="点赞", default=0)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name="书籍")
@@ -110,7 +110,7 @@ class Action(models.Model):
 class ActionComment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="用户")
     action = models.ForeignKey(Action, on_delete=models.CASCADE, verbose_name="活动")
-    comment = models.CharField(max_length=64, verbose_name="活动评论")
+    comment = models.TextField(verbose_name="活动评论")
     create_time = models.DateTimeField(auto_now_add=True)
 
 

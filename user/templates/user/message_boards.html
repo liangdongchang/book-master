@@ -48,7 +48,7 @@
                         <li>
                             {# 点击超链接,对上一页的页面发起访问 #}
                             <a href="{% url 'message_boards' fap_id page.previous_page_number %}" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
+                                <span aria-hidden="true">上一页</span>
                             </a>
                         </li>
 
@@ -58,7 +58,7 @@
                         <li class="disabled">
                             {# href="#",处于禁用状态的按钮被点击时直接跳转本页 #}
                             <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
+                                <span aria-hidden="true">上一页</span>
                             </a>
                         </li>
                     {% endif %}
@@ -83,14 +83,14 @@
                         <li>
                             {# 点击超链接,对下一页的页面发起访问 #}
                             <a href="{% url 'message_boards' fap_id page.next_page_number %}" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
+                                <span aria-hidden="true">下一页</span>
                             </a></li>
                     {% else %}
                         {# 当没有下一页时,阅读bootrap文档得知,对当前li使用disabled样式 #}
                         <li class="disabled">
                             {# href="#",处于禁用状态的按钮被点击时直接跳转本页 #}
                             <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
+                                <span aria-hidden="true">下一页</span>
                             </a></li>
                     {% endif %}
                 </ul>

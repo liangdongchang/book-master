@@ -321,6 +321,7 @@ def new_board_comment(request, message_board_id, fap_id=1, currentpage=1):
     BoardComment.objects.create(
         user=user, content=content, message_board_id=message_board_id
     )
+    MessageBoard.objects.filter(id=message_board_id).update(feebback_num=F('feebback_num') + 1)
     return redirect(reverse("get_message_board", args=(message_board_id, fap_id, currentpage)))
 
 
@@ -344,6 +345,16 @@ def like_collect(request):
         if not collectboard:
             CollectBoard.objects.create(user=user, message_board_id=message_board_id, is_collect=is_collect if like_or_collect == 'collect' else 0,
                                         is_like=is_like if like_or_collect == 'like' else 0)
+            if like_or_collect == 'like':
+                if is_like == 0:
+                    MessageBoard.objects.filter(id=message_board_id).update(like_num=F('like_num') - 1)
+                else:
+                    MessageBoard.objects.filter(id=message_board_id).update(like_num=F('like_num') + 1)
+            else:
+                if is_like == 0:
+                    MessageBoard.objects.filter(id=message_board_id).update(collect_num=F('collect_num') - 1)
+                else:
+                    MessageBoard.objects.filter(id=message_board_id).update(collect_num=F('collect_num') + 1)
             return JsonResponse(data={'code': 1, 'msg': '操作成功'})
         collectboard = collectboard.first()
         if like_or_collect == 'like':
@@ -352,6 +363,16 @@ def like_collect(request):
             is_like = collectboard.is_like
         CollectBoard.objects.filter(user=user, message_board_id=message_board_id).update(is_collect=is_collect,
                                                                                          is_like=is_like)
+        if like_or_collect == 'like':
+            if is_like == 0:
+                MessageBoard.objects.filter(id=message_board_id).update(like_num=F('like_num') - 1)
+            else:
+                MessageBoard.objects.filter(id=message_board_id).update(like_num=F('like_num') + 1)
+        else:
+            if is_like == 0:
+                MessageBoard.objects.filter(id=message_board_id).update(collect_num=F('collect_num') - 1)
+            else:
+                MessageBoard.objects.filter(id=message_board_id).update(collect_num=F('collect_num') + 1)
         return JsonResponse(data={'code': 1, 'msg': '操作成功', 'is_like': is_like, 'is_collect': is_collect})
     except Exception as e:
         print(e)

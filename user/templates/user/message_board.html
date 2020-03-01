@@ -7,7 +7,7 @@
         {#        <li><a href="{% url 'get_message_board' msg_board.id %}">{{ msg_board.title }}</a></li>#}
         <li class="active">帖子详情页面</li>
     </ul>
-    <div class="container">
+    <div class="container" align="center">
         <div class="row text-center h2">{{ msg_board.title }}</div>
         <div class="row h5">
             作者：<span style="padding-right: 10px">{{ msg_board.user.name }}</span>
