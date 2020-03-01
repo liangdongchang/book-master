@@ -1,0 +1,45 @@
+<form id="formAdd" method="post" action="{% url 'new_board_comment' msg_board.id fap_id currentpage %}">
+    {% csrf_token %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" style="width: 800px;height: 400px" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">短评</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">详细内容:</label>
+                        <textarea id="comment_content" name="content" class="form-control" rows="10"
+                                  cols="240"></textarea>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+
+                {#                <div class="modal-footer"></div>#}
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    tinyMCE.init({
+        'mode': 'textareas',
+        'theme': 'advanced',
+        'width': 700,
+        'height': 300,
+        'language': 'zh',
+        'style_formats': [
+            {'title': 'Bold text', 'inline': 'b'},
+            {'title': 'Red text', 'inline': 'span', 'styles': {'color': '#ff0000'}},
+            {'title': 'Red header', 'block': 'h1', 'styles': {'color': '#ff0000'}},
+            {'title': 'Example 1', 'inline': 'span', 'classes': 'example1'},
+            {'title': 'Example 2', 'inline': 'span', 'classes': 'example2'},
+            {'title': 'Table styles'},
+            {'title': 'Table row 1', 'selector': 'tr', 'classes': 'tablerow1'}
+        ],
+    });
+</script>

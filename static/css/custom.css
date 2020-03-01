@@ -1,0 +1,117 @@
+
+.graph-container {
+
+    margin-top: 25px;
+}
+
+.severity-5 {
+    background-color: red;
+}
+
+.severity-4 {
+    background-color: orangered;
+}
+
+.severity-3 {
+    background-color: yellow;
+}
+
+/* book image */
+
+.book-image {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+.content {
+    padding-top: 60px;
+}
+
+.content .main {
+    width: 1300px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.content ul, .content li, .content h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.content ul {
+    list-style: none;
+    height: 50px;
+    margin: 0 auto;
+
+}
+
+.content .main ul li {
+    list-style: none;
+    float: left;
+    width: 420px;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.content .main ul li div {
+    border: 2px solid black;
+    margin-top: 10px;
+    /*height: 470px;*/
+    /*overflow: auto;*/
+}
+
+.content .main ul .topicCotent {
+    padding: 0 70px 0;
+    margin: 0 10px 2px;
+}
+
+.general, .import, .urgency {
+    font-size: 12px;
+}
+
+.general {
+    color: green;
+}
+
+.import {
+    color: #A3541D;
+}
+
+.urgency {
+    color: red;
+}
+
+.content .main ul .topicCotent .showTime {
+    font-size: 12px;
+}
+
+.content .main ul .topicCotent .rtopic {
+    font-size: 16px;
+    color: black;
+}
+
+.content .main .list-group-item {
+    width: 350px;
+
+    text-align: center;
+    font-size: 16px;
+    display: inline-block;
+    margin-bottom: 7px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+
+.content .main .add {
+    width: 350px;
+    text-align: center;
+    font-size: 16px;
+    margin: 5px auto;
+    display: block;
+}
+
+
+
+

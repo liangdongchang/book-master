@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block right-panel-content %}
+{% for i in tags %}
+<h2><a href="{% url 'kind' i.id %}">{{ i.name }}</a></h2>
+{% endfor %}
+{% endblock %}

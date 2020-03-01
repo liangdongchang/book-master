@@ -1,0 +1,40 @@
+from django.urls import path
+from user import views
+
+urlpatterns = [
+    path("", views.all_book, name="index"),
+    path("login/", views.login, name="login"),
+    path("register/", views.register, name="register"),
+    path("logout/", views.logout, name="logout"),
+    # path("item/", views.item, name="item"),
+    path("all_book/", views.all_book, name="all_book"),
+    path("book/<int:book_id>/", views.book, name="book"),
+    path("score/<int:book_id>/", views.score, name="score"),
+    path("comment/<int:book_id>/", views.commen, name="comment"),
+    path("good/<int:commen_id>/<int:book_id>/", views.good, name="good"),
+    path("collect/<int:book_id>/", views.collect, name="collect"),
+    path("decollect/<int:book_id>/", views.decollect, name="decollect"),
+    path("message_boards/<int:fap_id>/<int:pagenum>/", views.message_boards, name="message_boards"),
+    path("get_message_board/<int:message_board_id>/<int:fap_id>/<int:currentpage>/", views.get_message_board, name="get_message_board"),
+    path("new_board_comment/<int:message_board_id>/<int:fap_id>/<int:currentpage>/", views.new_board_comment, name="new_board_comment"),
+    path("new_message_board/", views.new_message_board, name="new_message_board"),
+    path("like_collect/", views.like_collect, name="like_collect"),  # 点赞或收藏
+
+    path("personal/", views.personal, name="personal"),
+    path("mycollect/", views.mycollect, name="mycollect"),
+    path("myjoin/", views.myjoin, name="myjoin"),
+    path("my_comments/", views.my_comments, name="my_comments"),
+    path("my_rate/", views.my_rate, name="my_rate"),
+    path("delete_comment/<int:comment_id>", views.delete_comment, name="delete_comment"),
+    path("delete_rate/<int:rate_id>", views.delete_rate, name="delete_rate"),
+    path("hot_book/", views.hot_book, name="hot_book"),
+    path("latest_book/", views.latest_book, name="latest_book"),
+    path("search/", views.search, name="search"),
+    path("nobel_book/", views.nobel_book, name="nobel_book"),
+    path("md_book/", views.md_book, name="md_book"),
+    path("begin/", views.begin, name="begin"),
+    path("kindof/", views.kindof, name="kindof"),
+    path("kind/<int:kind_id>/", views.kind, name="kind"),
+    path("week_reco/", views.reco_by_week, name="week_reco"),
+    path("monthitem/", views.reco_by_week, name="monthitem"),
+]

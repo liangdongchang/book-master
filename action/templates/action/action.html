@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block right-panel-content %}
+    <div class="container">
+        {% for i in action %}
+            <div class="row clearfix">
+                <div class="col-md-4 column">
+                    <img class="img-rounded book-image" alt="140x140" src="/media/{{ i.one }}" width=140px height=140px/>
+                </div>
+                <div class="col-md-8 column">
+
+                    <h4><a href="{% url 'actionone' i.id %}">{{ i.title }}</a></h4>
+                    <p>{{ i.content }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{#    <div class="row">#}
+{#    <div class="col-md-9" style="margin-top: 30px">#}
+{#                <form action="/">#}
+{#                    <label style="font-size: 30px" for="comment">评论</label>#}
+{#            <input type="text" class="form-control" name="comment" id="comment">#}
+{#        </form>#}
+{##}
+{#    </div>#}
+{##}
+{#    </div>#}
+
+
+{% endblock %}

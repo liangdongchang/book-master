@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% block right-panel-content %}
+
+
+    <div class="header">
+        <ul class="nav nav-pills navbar faq-tabbable">
+            <li role="presentation" class="active"><a href="{% url 'message_boards' 1  1 %}">热门</a></li>
+            <li role="presentation"><a href="{% url 'message_boards' 2 1 %}">最新</a></li>
+            <li role="presentation"><a href="{% url 'message_boards' 3 1 %}">点赞</a></li>
+            <li role="presentation"><a href="{% url 'message_boards' 4 1 %}">收藏</a></li>
+            <li role="presentation"><a href="{% url 'message_boards' 5 1 %}">我的</a></li>
+        </ul>
+    </div>
+    <div class="container-fluid" align="center">
+        <table class="table">
+            <thead>
+            <th style="width: 500px">标题</th>
+            <th style="width: 100px">作者</th>
+            <th style="width: 50px">浏览</th>
+            <th style="width: 50px">点赞</th>
+            <th style="width: 50px">回复</th>
+            <th style="width: 100px">时间</th>
+            </thead>
+            <tbody>
+            {% for i in  page.object_list %}
+                <tr>
+                    <td><a href="{% url 'get_message_board' i.id fap_id currentpage %}">{{ i.title }}</a></td>
+                    <td>{{ i.user.name }}</td>
+                    <td>{{ i.look_num }}</td>
+                    <td>{{ i.like_num }}</td>
+                    <td>{{ i.feebback_num }}</td>
+                    <td>{{ i.create_time | date:'m-d H:i' }}</td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% if not have_board %}
+            <p style="color: #1db393">暂无帖子哦~~~</p>
+        {% else %}
+            {#分页器:html内容拷贝于bootstrap网站-组件-分页#}
+            {# bootstrap是一整套成熟经典的页面组件框架 #}
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {# 上一页按钮 #}
+                    {# 如果有上一页 #}
+                    {% if page.has_previous %}
+                        <li>
+                            {# 点击超链接,对上一页的页面发起访问 #}
+                            <a href="{% url 'message_boards' fap_id page.previous_page_number %}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+
+                        {# 如果没有上一页 #}
+                    {% else %}
+                        {# 当没有上一页时,阅读bootrap文档得知,对当前li使用disabled样式 #}
+                        <li class="disabled">
+                            {# href="#",处于禁用状态的按钮被点击时直接跳转本页 #}
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {# 页码按钮 #}
+                    {# 遍历传入的页码范围 #}
+                    {% for p in pagerange %}
+                        {# 如果页码=当前页页码 #}
+                        {% ifequal p currentpage %}
+                            {# 被选中的页码具有高亮效果,阅读bootrap文档得知,对当前li使用active样式 #}
+                            {# {% url 'app:blogs' p %} 点击页码,对第p页的路由发起访问 #}
+                            <li class="active"><a href="{% url 'message_boards' fap_id p %}">{{ p }}</a></li>
+                        {% else %}
+                            {# 非当前页页码普通显示 #}
+                            <li><a href="{% url 'message_boards' fap_id p %}">{{ p }}</a></li>
+                        {% endifequal %}
+                    {% endfor %}
+
+
+                    {# 下一页按钮 #}
+                    {% if page.has_next %}
+                        <li>
+                            {# 点击超链接,对下一页的页面发起访问 #}
+                            <a href="{% url 'message_boards' fap_id page.next_page_number %}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a></li>
+                    {% else %}
+                        {# 当没有下一页时,阅读bootrap文档得知,对当前li使用disabled样式 #}
+                        <li class="disabled">
+                            {# href="#",处于禁用状态的按钮被点击时直接跳转本页 #}
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+        {% endif %}
+    </div>
+
+    <div class="container-fluid" align="center" >
+        <form role="form" action="{% url 'new_message_board' %}" method="post" onsubmit="return toVaild()">
+            {% csrf_token %}
+            <div class="form-group">
+                <h3><label for="title">发布帖子</label></h3>
+                <input type="text" id="title"  class="form-control" style="width: 800px" name="title" maxlength="30"
+                       placeholder="标题（最多30字）">
+                {#                <label>内容:</label>#}
+                <textarea id="board_content" name="content" class="form-control" rows="10" cols="240"></textarea>
+
+            </div>
+            <div style="width: 800px" align="center">
+                <button class="btn btn-default btn-primary" type="submit">点我发布</button>
+            </div>
+
+        </form>
+    </div>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src='/static/tiny_mce/tiny_mce.js'></script>
+    <script type="text/javascript">
+        tinyMCE.init({
+            'mode': 'textareas',
+            'theme': 'advanced',
+            'width': 800,
+            'height': 300,
+            'language': 'zh',
+            'style_formats': [
+                {'title': 'Bold text', 'inline': 'b'},
+                {'title': 'Red text', 'inline': 'span', 'styles': {'color': '#ff0000'}},
+                {'title': 'Red header', 'block': 'h1', 'styles': {'color': '#ff0000'}},
+                {'title': 'Example 1', 'inline': 'span', 'classes': 'example1'},
+                {'title': 'Example 2', 'inline': 'span', 'classes': 'example2'},
+                {'title': 'Table styles'},
+                {'title': 'Table row 1', 'selector': 'tr', 'classes': 'tablerow1'}
+            ],
+        });
+
+        $(function ($) {
+            {#    导航栏按钮渲染#}
+            $(".faq-tabbable").find("li").each(function () {
+                var a = $(this).find("a:first")[0];
+                if ($(a).attr("href") === location.pathname) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        });
+
+        function toVaild() {
+
+            var title = document.getElementById("title").value;
+            var content = document.getElementById("board_content").value;
+
+            if (title.length === 0 || content.length === 0) {
+                alert("标题与内容都不能为空");
+                return false;
+            }
+            else {
+
+                return true;
+            }
+        }
+    </script>
+{% endblock %}
+
+

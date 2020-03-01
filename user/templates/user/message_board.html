@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% block  right-panel-content %}
+
+    <body>
+    <ul class="breadcrumb">
+        <li><a href="{% url 'message_boards' fap_id currentpage %}">返回</a></li>
+        {#        <li><a href="{% url 'get_message_board' msg_board.id %}">{{ msg_board.title }}</a></li>#}
+        <li class="active">帖子详情页面</li>
+    </ul>
+    <div class="container">
+        <div class="row text-center h2">{{ msg_board.title }}</div>
+        <div class="row h5">
+            作者：<span style="padding-right: 10px">{{ msg_board.user.name }}</span>
+            时间：<span>{{ msg_board.create_time }}</span>
+
+        </div>
+        <div class="row h5"></div>
+        <div class="row h5">
+            {% autoescape off %}
+                {{ msg_board.content }}
+            {% endautoescape %}
+
+        </div>
+    </div>
+    <!---评论区------>
+
+    <div align="center" style="font-size: 20px">
+        {#        <caption>回帖区</caption>#}
+        <div style="padding-top: 10px;padding-bottom: 5px">
+            {% csrf_token %}
+            {% if is_like %}
+                <button class="like" style="margin: 15px 15px 0" value=0>
+                    <span style="color: red; font-size: 20px">已点赞</span>
+                </button>
+            {% else %}
+                <button class="like" style="margin: 15px 15px 0" value=1>
+                    <span style="color: blue; font-size: 20px">点赞</span>
+                </button>
+            {% endif %}
+
+            {% if is_collect %}
+                <button class="collect" style="margin: 15px 15px 0" value=0>
+                    <span style="color: red; font-size: 20px">已收藏</span>
+                </button>
+            {% else %}
+                <button class="collect" style="margin: 15px 15px 0" value=1>
+                    <span style="color: blue; font-size: 20px">收藏</span>
+                </button>
+            {% endif %}
+
+            <button class="comment" data-toggle="modal" data-target="#exampleModal" style="margin: 15px 15px 0">
+                <span style="color: blue; font-size: 20px">我要写短评</span>
+            </button>
+
+            {% include 'user/includeModal.html' %}
+
+        </div>
+        <div style="padding-top: 10px;padding-bottom: 3px;" align="left">
+
+            {% if not have_comment %}
+                <p align="center" style="color: #1db393">暂无评论哦,快去写一个吧~~~</p>
+            {% else %}
+            {% endif %}
+            {% for comment in board_comments %}
+                <div style="border-bottom:1px solid #6f8061; padding-top: 10px">
+                    <div style="padding-left: 10px;">
+                        {{ forloop.counter }}楼：
+                        <span style="color: #1A01CC">{{ comment.user.name }}</span>
+                        <span>{{ comment.create_time| date:'Y-m-d' }}</span>
+                    </div>
+                    <div style="padding-left: 50px">
+                        {% autoescape off %}
+                            {{ comment.content }}
+                        {% endautoescape %}
+                    </div>
+                </div>
+
+
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src='/static/tiny_mce/tiny_mce.js'></script>
+    <script type="text/javascript">
+        tinyMCE.init({
+            'mode': 'textareas',
+            'theme': 'advanced',
+            'width': 700,
+            'height': 300,
+            'language': 'zh',
+            'style_formats': [
+                {'title': 'Bold text', 'inline': 'b'},
+                {'title': 'Red text', 'inline': 'span', 'styles': {'color': '#ff0000'}},
+                {'title': 'Red header', 'block': 'h1', 'styles': {'color': '#ff0000'}},
+                {'title': 'Example 1', 'inline': 'span', 'classes': 'example1'},
+                {'title': 'Example 2', 'inline': 'span', 'classes': 'example2'},
+                {'title': 'Table styles'},
+                {'title': 'Table row 1', 'selector': 'tr', 'classes': 'tablerow1'}
+            ],
+        });
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+
+        $(".like").click(function () {
+            var btnThis = $(this);
+            var is_like = $(this).attr("value");
+            var is_collect = $(".collect").attr("value");
+            var url = '{% url "like_collect" %}';
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    'is_like': is_like,
+                    'is_collect': is_collect,
+                    'like_or_collect': 'like',
+                    'message_board_id': {{ message_board_id }}
+                },
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"))
+                },
+                success: function (res) {
+
+                    if (res) {
+                        if (res.code === 2) {
+                            window.location.href = {% url 'login' %};
+
+                        } else if (res.code === 0) {
+                            alert(res.msg);
+                        }
+                        else {
+                            if (is_like == 1) {
+                                btnThis.find('span').css("color", "red");
+                                btnThis.find('span').html('已点赞');
+                                btnThis.attr('value', 0);
+                            } else {
+                                btnThis.find('span').css("color", "blue");
+                                btnThis.find('span').html('点赞');
+                                btnThis.attr('value', 1);
+                            }
+                        }
+                    }
+                }, error: function (e) {
+                    alert(e.responseText);
+                }
+            });
+        });
+        $(".collect").click(function () {
+            var btnThis = $(this);
+            var is_collect = $(this).attr("value");
+            var is_like = $(".like").attr("value");
+            var url = '{% url "like_collect" %}';
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    'is_like': is_like,
+                    'is_collect': is_collect,
+                    'like_or_collect': 'collect',
+                    'message_board_id': {{ message_board_id }}
+                },
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"))
+                },
+                success: function (res) {
+
+                    if (res) {
+                        if (res.code === 2) {
+                            window.location.href = {% url 'login' %};
+                        } else if (res.code === 0) {
+                            alert(res.msg);
+                        }
+                        else {
+                            if (is_collect == 1) {
+                                btnThis.find('span').css("color", "red");
+                                btnThis.find('span').html('已收藏');
+                                btnThis.attr('value', 0);
+                            } else {
+                                btnThis.find('span').css("color", "blue");
+                                btnThis.find('span').html('收藏');
+                                btnThis.attr('value', 1);
+                            }
+                        }
+                    }
+                }, error: function (e) {
+                    alert(e.responseText);
+                }
+            });
+        });
+
+        var modal;
+        $('#exampleModal').on('show.bs.modal', function (event) {
+
+            var button = $(event.relatedTarget); // 触发事件的按钮
+            modal = $(this);
+
+        });
+
+
+    </script>
+{% endblock %}

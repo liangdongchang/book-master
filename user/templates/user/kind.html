@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block right-panel-content %}
+<h3 style="text-align:center">{{ i.tags }}</h3>
+    {% if not books %}
+        <h2 class="text-center">没有书籍</h2>
+    {% endif %}
+{% for book in books %}
+<div class="container-fluid">
+	<div class="row clearfix">
+		<div class="col-md-3 column">
+			<img alt="140x140" src="/media/{{ book.pic }}" width=200px  height=200px />
+		</div>
+		<div class="col-md-7 column">
+			<h3>
+				<a href="{% url 'book' book.id %}">	{{ book.title }}</a>
+			</h3>
+			<p>{{ i.intro | slice:":100" }}......</p>
+			<p>浏览量:{{ book.num }}</p>
+		</div>
+	</div>
+</div>
+{% endfor %}
+{% endblock %}
