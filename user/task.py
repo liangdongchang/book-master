@@ -19,7 +19,7 @@ def start_running(info):
     print('>---任务结束---<')
 
 
-@shared_task
+@app.task
 def pushMsg(uid, msg):
     print('推送消息', uid, msg)
     return True
