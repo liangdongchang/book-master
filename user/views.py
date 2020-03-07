@@ -6,6 +6,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from rest_framework.renderers import JSONRenderer
+from django.views.decorators.cache import cache_page
 
 from recommend_books import recommend_by_user_id
 from .forms import *
@@ -185,10 +186,12 @@ def decollect(request, book_id):
     return redirect(reverse("book", args=(book_id,)))
 
 
+# 方法I
+@cache_page(60 * 1)
 def message_boards(request, fap_id=1, pagenum=1, **kwargs):
     # 获取论坛内容
     msg = request.GET.get('msg', '')
-    print(msg)
+    print('做了缓存')
     have_board = True
     if fap_id == 1:
         # 热门
@@ -292,7 +295,7 @@ def get_message_board(request, message_board_id, fap_id=1, currentpage=1):
     msg_board = MessageBoard.objects.get(id=message_board_id)
 
     board_comments = msg_board.boardcomment_set.all()
-    have_comment =True
+    have_comment = True
     if not board_comments:
         have_comment = False
 
@@ -343,7 +346,8 @@ def like_collect(request):
     try:
         collectboard = CollectBoard.objects.filter(user=user, message_board_id=message_board_id)
         if not collectboard:
-            CollectBoard.objects.create(user=user, message_board_id=message_board_id, is_collect=is_collect if like_or_collect == 'collect' else 0,
+            CollectBoard.objects.create(user=user, message_board_id=message_board_id,
+                                        is_collect=is_collect if like_or_collect == 'collect' else 0,
                                         is_like=is_like if like_or_collect == 'like' else 0)
             if like_or_collect == 'like':
                 if is_like == 0:
@@ -499,3 +503,14 @@ def reco_by_week(request):
     return render(
         request, "user/item.html", {"books": books, "path": path, "title": title}
     )
+
+
+# celery测试
+from user.task import start_running
+
+
+def celery_test(request):
+    print('>=====开始发送请求=====<')
+    start_running.delay('发送短信')
+    # start_running.apply_async(('发送短信',), countdown=10)  # 10秒后再执行异步任务
+    return HttpResponse('<h2> 请求已发送 </h2>')

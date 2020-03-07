@@ -37,4 +37,5 @@ urlpatterns = [
     path("kind/<int:kind_id>/", views.kind, name="kind"),
     path("week_reco/", views.reco_by_week, name="week_reco"),
     path("monthitem/", views.reco_by_week, name="monthitem"),
+    path("celery/", views.celery_test, name="celery_test"),
 ]

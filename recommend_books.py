@@ -21,7 +21,7 @@ class UserCf:
         return self.data[username1], self.data[username2]
 
     # 计算两个用户的皮尔逊相关系数
-    def pearson(self, user1, user2):  # 数据格式为：商品id，浏览此
+    def pearson(self, user1, user2):  # 数据格式为：商品id，浏览次数
         print("user message", user1)
         sumXY = 0.0
         n = 0

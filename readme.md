@@ -137,3 +137,68 @@ http://127.0.0.1:8000/
 
 
 
+
+
+## 使用redis+celery做分布式
+
+### 1、解压redis-64.2.8.2101.rar到D盘
+
+然后启动redis,直接双击【启动redis.bat】
+
+如果是解压redis到其它文件夹，则使用文本打开【启动redis.bat】，然后修改启动路径
+
+![1583568620010](image\启动redis.png)
+
+
+
+### 2、安装第三方库
+
+```python
+pip install -r requirements.txt
+```
+
+### 3、数据库迁移
+
+```python
+打开pycharm左上角的Tools->Run manage.py Task
+依次输入命令
+makemigrations
+migrate
+```
+
+
+
+### 4、启动项目
+
+```python
+打开Pycharm左下角的Terminal
+输入命令
+python manage.py runserver
+```
+
+
+
+### 5、启动celery分布式
+
+![1583568968675](image\terminal.png)
+
+```python
+打开第二个Terminal
+输入命令(可以把下面命令复制到Terminal，然后回车)
+celery -A book beat -s "celery_app/celerybeat-schedule" --pidfile=
+
+```
+
+```python
+打开第三个Terminal
+输入命令(可以把下面命令复制到Terminal，然后回车)，实现对celery的监督
+celery -A book worker -l debug -P eventlet
+```
+
+
+
+对celery有不懂的可以查看网站[celery](https://blog.csdn.net/lm_is_dc/article/details/82705450)
+
+
+
+https://blog.csdn.net/lm_is_dc/article/details/82705450

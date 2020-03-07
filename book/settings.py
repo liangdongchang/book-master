@@ -40,6 +40,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    #django_celery_beat应用
+    'django_celery_beat',
+    # celery应用
+    'djcelery',
+
     # 注册富文本应用
     'tinymce',
     "user",
@@ -47,6 +52,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # 增加缓存中间件
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -85,12 +93,20 @@ WSGI_APPLICATION = "book.wsgi.application"
 #         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
 #     }
 # }
+"""
+把账号密码修改为你的
+"""
+DATABASES_NAME = 'bookmaster'  # 数据库名称
+DATABASES_USER = 'root'  # 数据库用户名
+DATABASES_PASSWORD = 'ldc-root'  # 数据库密码
+REDIS_PASSWORD = 'ldc-root'  # redis密码
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 修改数据库为MySQL，并进行配置
-        'NAME': 'bookmaster',  # 数据库名称
-        'USER': 'root',  # 你的用户名，
-        'PASSWORD': 'ldc-root',  # 你的密码
+        'NAME': DATABASES_NAME,  # 数据库名称
+        'USER': DATABASES_USER,  # 你的用户名，
+        'PASSWORD': DATABASES_PASSWORD,  # 你的密码
         'HOST': 'localhost',
         'PORT': 3306,
         'OPTIONS': {'charset': 'utf8mb4', }
@@ -161,3 +177,22 @@ TINYMCE_DEFAULT_CONFIG = {
         {'title': 'Table row 1', 'selector': 'tr', 'classes': 'tablerow1'}
     ],
 }
+
+# django-celery
+import djcelery
+
+djcelery.setup_loader()
+# 使用本地redis服务器中的0号数据库，redis密码为123456
+BROKER_URL = 'redis://:{}@127.0.0.1:6379/0'.format(REDIS_PASSWORD)
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+CELERY_RESULT_BACKEND = 'redis://:{}@127.0.0.1:6379/1'.format(REDIS_PASSWORD)
+CELERY_ENABLE_UTC = False
+CELERY_TIMEZONE = 'Asia/Shanghai'
+CELERY_TASK_RESULT_EXPIRES = 10
+CELERYD_LOG_FILE = BASE_DIR + "/logs/celery/celery.log"
+CELERYBEAT_LOG_FILE = BASE_DIR + "/logs/celery/beat.log"
+CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+DJANGO_CELERY_BEAT_TZ_AWARE = False
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
