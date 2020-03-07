@@ -12,7 +12,7 @@ chardet==3.0.4
 coreapi==2.3.3
 coreschema==0.0.4
 cryptography==2.3.1
-Django==2.0.1
+Django==2.2.10
 django-appconf==1.0.3
 django-bootstrap-toolkit==2.15.0
 django-celery==3.3.1
