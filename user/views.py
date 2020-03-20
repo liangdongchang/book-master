@@ -187,11 +187,11 @@ def decollect(request, book_id):
 
 
 # 方法I
-@cache_page(60 * 1)
+# @cache_page(60 * 1)
 def message_boards(request, fap_id=1, pagenum=1, **kwargs):
     # 获取论坛内容
     msg = request.GET.get('msg', '')
-    print('做了缓存')
+    # print('做了缓存')
     have_board = True
     if fap_id == 1:
         # 热门
@@ -274,6 +274,7 @@ def new_message_board(request):
     user = User.objects.get(id=request.session.get("user_id"))
     title = request.POST.get("title")
     content = request.POST.get("content")
+    print('ddddddddddddddddd', title, content)
     if not title or not content:
         return redirect(reverse("message_boards", kwargs={'fap_id': 2, 'pagenum': 1}))
     MessageBoard.objects.create(user=user, content=content, title=title)
