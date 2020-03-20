@@ -9,7 +9,7 @@
 然后按以下图片所示找到相应位置，修改连接mysql的用户名与密码
 ```
 
-![1583056214999](image\1583056214999.png)
+![1583056214999](image/1583056214999.png)
 
 ## 2、创建虚拟环境
 
@@ -18,7 +18,7 @@
 打开pycharm,依次点击左上角File->settings->Project:book-master->Project Interpreter
 ```
 
-![1583056468304](image\1583056468304.png)
+![1583056468304](image/1583056468304.png)
 
 ## 3、安装依赖库
 
@@ -64,7 +64,7 @@ python manage.py runserver
 http://127.0.0.1:8000/admin/
 ```
 
-![1583057347009](image\1583057347009.png)
+![1583057347009](image/1583057347009.png)
 
 
 
@@ -106,7 +106,7 @@ http://127.0.0.1:8000/
 
 ### 界面
 
-![1584710625859](image\界面.png)
+![1584710625859](image/界面.png)
 
 ### 注册和登录
 
@@ -126,7 +126,7 @@ http://127.0.0.1:8000/
 
 ### 论坛
 
-![1584711445272](image\论坛.png)
+![1584711445272](image/论坛.png)
 
 
 
@@ -148,7 +148,7 @@ http://127.0.0.1:8000/
 
 如果是解压redis到其它文件夹，则使用文本打开【启动redis.bat】，然后修改启动路径
 
-![1583568620010](image\启动redis.png)
+![1583568620010](image/启动redis.png)
 
 
 
@@ -181,7 +181,7 @@ python manage.py runserver
 
 ### 5、启动celery分布式
 
-![1583568968675](image\terminal.png)
+![1583568968675](image/terminal.png)
 
 ```python
 打开第二个Terminal
@@ -203,3 +203,4 @@ celery -A book worker -l debug -P eventlet
 
 
 https://blog.csdn.net/lm_is_dc/article/details/82705450
+
