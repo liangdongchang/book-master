@@ -61,6 +61,9 @@ python manage.py runserver
 
 ```
 输入地址
+http://127.0.0.1:8000/create_book/
+这个是生成一些常用的书籍
+下面这个是后台手动上架图书
 http://127.0.0.1:8000/admin/
 ```
 
