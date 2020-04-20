@@ -505,6 +505,7 @@ def reco_by_week(request):
         request, "user/item.html", {"books": books, "path": path, "title": title}
     )
 
+
 def create_book(request, ):
     # 创建书籍
     from django.db import connection, connections
@@ -515,10 +516,8 @@ def create_book(request, ):
             # print(sql)
             try:
                 cursor.execute(sql)
-
             except:
                 pass
-
 
     return redirect(reverse("login", ))
 
@@ -532,4 +531,3 @@ def celery_test(request):
     start_running.delay('发送短信')
     # start_running.apply_async(('发送短信',), countdown=10)  # 10秒后再执行异步任务
     return HttpResponse('<h2> 请求已发送 </h2>')
-

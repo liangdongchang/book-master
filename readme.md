@@ -5,11 +5,11 @@
 ## 1、修改book/settings.py中的数据库名称
 
 ```
-先在本地mysql创建一个名为bookmaster的数据库
+先在本地mysql创建一个名为book_master的数据库
 然后按以下图片所示找到相应位置，修改连接mysql的用户名与密码
 ```
 
-![1583056214999](image/1583056214999.png)
+![1587389870694](image/1587389870694.png)
 
 ## 2、创建虚拟环境
 
@@ -207,3 +207,21 @@ celery -A book worker -l debug -P eventlet
 
 https://blog.csdn.net/lm_is_dc/article/details/82705450
 
+
+
+## 后记
+
+【后记】为了让大家能够轻松学编程，我创建了一个公众号【轻松学编程】，里面有让你快速学会编程的文章，当然也有一些干货提高你的编程水平，也有一些编程项目适合做一些课程设计等课题。
+
+也可加我微信【1257309054】，拉你进群，大家一起交流学习。
+如果文章对您有帮助，请我喝杯咖啡吧！
+
+公众号
+
+![公众号](https://img-blog.csdnimg.cn/20200317124808234.jpg)
+
+
+
+![赞赏码](https://img-blog.csdnimg.cn/20200317125156789.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xtX2lzX2Rj,size_16,color_FFFFFF,t_70)
+
+关注我，我们一起成长~~
