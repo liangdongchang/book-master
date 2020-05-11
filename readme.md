@@ -1,7 +1,7 @@
 # 毕业设计--基于Django的图书推荐系统和论坛
 【联系方式：微信 1257309054】
 
-【体验demo:http://book.qsxbc.com/】
+体验demo:http://book.qsxbc.com/
 
 拉取项目后，启动项目步骤如下
 
