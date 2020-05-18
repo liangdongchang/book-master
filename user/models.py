@@ -40,6 +40,7 @@ class Book(models.Model):
     )
     collect = models.ManyToManyField(User, verbose_name="收藏者", blank=True)
     sump = models.IntegerField(verbose_name="收藏人数", default=0)
+    rate_num = models.IntegerField(verbose_name="评分人数", default=0)
     title = models.CharField(verbose_name="书名", max_length=32)
     author = models.CharField(verbose_name="作者", max_length=32)
     intro = models.TextField(verbose_name="描述")

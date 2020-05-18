@@ -89,7 +89,7 @@ def register(request):
             # 根据表单数据创建一个新的用户
             return redirect(reverse("login"))  # 跳转到登录界面
         else:
-            print(form, 'lllllllllllllllll')
+            # print(form, 'lllllllllllllllll')
             return render(
                 request, "user/register.html", {"form": form, "error": error}
             )  # 表单验证失败返回一个空表单到注册页面
@@ -127,45 +127,88 @@ def search(request):  # 搜索
 
 
 def book(request, book_id):
+    # 获取具体的书籍
     book = Book.objects.get(pk=book_id)
     book.num += 1
     book.save()
     comments = book.comment_set.order_by("-create_time")
     user_id = request.session.get("user_id")
-    is_rate = Rate.objects.filter(book=book).first()
-    if is_rate is not None:
-        book_rate = round(is_rate.avg_mark, 2)
+    rate = Rate.objects.filter(book=book).aggregate(Avg("mark")).get("mark__avg", 0)
+    rate = rate if rate else 0
+    book_rate = round(rate, 2)
+
     if user_id is not None:
         user = User.objects.get(pk=user_id)
         is_collect = book.collect.filter(id=user_id).first()
+        is_rate = Rate.objects.filter(book=book, user=user).first()
+    rate_num = book.rate_num
+    sump = book.sump
     return render(request, "user/book.html", locals())
 
 
 @login_in
 def score(request, book_id):
+    # 打分
     user = User.objects.get(id=request.session.get("user_id"))
     book = Book.objects.get(id=book_id)
-    score = float(request.POST.get("score"))
-    Rate.objects.get_or_create(user=user, book=book, defaults={"mark": score})
-    return redirect(reverse("book", args=(book_id,)))
+    score = float(request.POST.get("score", 0))
+    is_rate = Rate.objects.filter(book=book, user=user).first()
+    if not is_rate:
+        book.rate_num += 1
+        book.save()
+        Rate.objects.get_or_create(user=user, book=book, defaults={"mark": score})
+        is_rate = {'mark': score}
+    comments = book.comment_set.order_by("-create_time")
+    user_id = request.session.get("user_id")
+    rate = Rate.objects.filter(book=book).aggregate(Avg("mark")).get("mark__avg", 0)
+    rate = rate if rate else 0
+    book_rate = round(rate, 2)
+    user = User.objects.get(pk=user_id)
+    is_collect = book.collect.filter(id=user_id).first()
+    rate_num = book.rate_num
+    sump = book.sump
+    return render(request, "user/book.html", locals())
 
 
 @login_in
 def commen(request, book_id):
+    # 评论
     user = User.objects.get(id=request.session.get("user_id"))
     book = Book.objects.get(id=book_id)
-    # book.score.com += 1
-    # book.score.save()
-    comment = request.POST.get("comment")
+    comment = request.POST.get("comment", "")
     Comment.objects.create(user=user, book=book, content=comment)
-    return redirect(reverse("book", args=(book_id,)))
+    comments = book.comment_set.order_by("-create_time")
+    user_id = request.session.get("user_id")
+    rate = Rate.objects.filter(book=book).aggregate(Avg("mark")).get("mark__avg", 0)
+    rate = rate if rate else 0
+    book_rate = round(rate, 2)
+    user = User.objects.get(pk=user_id)
+    is_collect = book.collect.filter(id=user_id).first()
+    is_rate = Rate.objects.filter(book=book, user=user).first()
+    rate_num = book.rate_num
+    sump = book.sump
+    return render(request, "user/book.html", locals())
 
 
+@login_in
 def good(request, commen_id, book_id):
+    # 点赞
     commen = Comment.objects.get(id=commen_id)
     commen.good += 1
     commen.save()
-    return redirect(reverse("book", args=(book_id,)))
+    book = Book.objects.get(id=book_id)
+    comments = book.comment_set.order_by("-create_time")
+    user_id = request.session.get("user_id")
+    rate = Rate.objects.filter(book=book).aggregate(Avg("mark")).get("mark__avg", 0)
+    rate = rate if rate else 0
+    book_rate = round(rate, 2)
+    if user_id is not None:
+        user = User.objects.get(pk=user_id)
+        is_collect = book.collect.filter(id=user_id).first()
+        is_rate = Rate.objects.filter(book=book, user=user).first()
+    rate_num = book.rate_num
+    sump = book.sump
+    return render(request, "user/book.html", locals())
 
 
 @login_in
@@ -173,8 +216,21 @@ def collect(request, book_id):
     user = User.objects.get(id=request.session.get("user_id"))
     book = Book.objects.get(id=book_id)
     book.collect.add(user)
+    book.sump += 1  # 收藏人数加1
     book.save()
-    return redirect(reverse("book", args=(book_id,)))
+
+    comments = book.comment_set.order_by("-create_time")
+    user_id = request.session.get("user_id")
+    rate = Rate.objects.filter(book=book).aggregate(Avg("mark")).get("mark__avg", 0)
+    rate = rate if rate else 0
+    book_rate = round(rate, 2)
+
+    user = User.objects.get(pk=user_id)
+    is_collect = book.collect.filter(id=user_id).first()
+    is_rate = Rate.objects.filter(book=book, user=user).first()
+    rate_num = book.rate_num
+    sump = book.sump
+    return render(request, "user/book.html", locals())
 
 
 @login_in
@@ -182,8 +238,20 @@ def decollect(request, book_id):
     user = User.objects.get(id=request.session.get("user_id"))
     book = Book.objects.get(id=book_id)
     book.collect.remove(user)
+    book.sump -= 1
     book.save()
-    return redirect(reverse("book", args=(book_id,)))
+    comments = book.comment_set.order_by("-create_time")
+    user_id = request.session.get("user_id")
+    rate = Rate.objects.filter(book=book).aggregate(Avg("mark")).get("mark__avg", 0)
+    rate = rate if rate else 0
+    book_rate = round(rate, 2)
+
+    user = User.objects.get(pk=user_id)
+    is_collect = book.collect.filter(id=user_id).first()
+    is_rate = Rate.objects.filter(book=book, user=user).first()
+    rate_num = book.rate_num
+    sump = book.sump
+    return render(request, "user/book.html", locals())
 
 
 # 方法I
@@ -274,7 +342,7 @@ def new_message_board(request):
     user = User.objects.get(id=request.session.get("user_id"))
     title = request.POST.get("title")
     content = request.POST.get("content")
-    print('ddddddddddddddddd', title, content)
+    # print('ddddddddddddddddd', title, content)
     if not title or not content:
         return redirect(reverse("message_boards", kwargs={'fap_id': 2, 'pagenum': 1}))
     MessageBoard.objects.create(user=user, content=content, title=title)
@@ -501,6 +569,18 @@ def reco_by_week(request):
     books = books_paginator(recommend_by_user_id(request.session.get("user_id")), page)
     path = request.path
     title = "周推荐图书"
+    return render(
+        request, "user/item.html", {"books": books, "path": path, "title": title}
+    )
+
+
+@login_in
+def reco_by_month(request):
+    # 月推荐图书
+    page = request.GET.get("page", 1)
+    books = books_paginator(recommend_by_user_id(request.session.get("user_id")), page)
+    path = request.path
+    title = "月推荐图书"
     return render(
         request, "user/item.html", {"books": books, "path": path, "title": title}
     )
