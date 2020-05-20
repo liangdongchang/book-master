@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     # 注册富文本应用
     'tinymce',
     "user",
-    "action",
 ]
 
 MIDDLEWARE = [
