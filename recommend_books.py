@@ -96,10 +96,14 @@ class UserCf:
         recommend = {}
         nearest_user = self.nearest_user(username, n)
         for user, score in dict(nearest_user).items():  # 最相近的n个用户
-            for movies, scores in self.data[user].items():  # 推荐的用户的书籍列表
-                if movies not in self.data[username].keys():  # 当前username没有看过
-                    if movies not in recommend.keys():  # 添加到推荐列表中
-                        recommend[movies] = scores
+            for book_id, scores in self.data[user].items():  # 推荐的用户的书籍列表
+                if book_id not in self.data[username].keys():  # 当前username没有看过
+                    rate = Rate.objects.filter(book_id=book_id, user__username=user)
+                    # 如果用户评分低于3分，则表明用户不喜欢此书籍，则不推荐给别的用户
+                    if rate and rate.first().mark < 3:
+                        continue
+                    if book_id not in recommend.keys():  # 添加到推荐列表中
+                        recommend[book_id] = scores
         # 对推荐的结果按照书籍浏览次数排序
         return sorted(recommend.items(), key=operator.itemgetter(1), reverse=True)
 
