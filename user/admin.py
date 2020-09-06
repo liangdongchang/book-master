@@ -53,6 +53,25 @@ class LiuyanAdmin(admin.ModelAdmin):
 class NumAdmin(admin.ModelAdmin):
     list_display = ("users", "books", "comments", "actions", "message_boards")
 
+    def get_queryset(self, request):
+        users = User.objects.all().count()
+        books = Book.objects.all().count()
+        comments = Comment.objects.all().count()
+        actions = Action.objects.all().count()
+        message_boards = MessageBoard.objects.all().count()
+        if Num.objects.all().count() == 0:
+            Num.objects.create(users=users, books=books, comments=comments, actions=actions,
+                               message_boards=message_boards, )
+        else:
+            for num in Num.objects.all():
+                num.users = users
+                num.books = books
+                num.comments = comments
+                num.actions = actions
+                num.message_boards = message_boards
+                num.save()
+        return super().get_queryset(request)
+
 
 admin.site.register(Tags)
 admin.site.register(User, UserAdmin)

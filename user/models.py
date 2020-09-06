@@ -107,6 +107,9 @@ class Action(models.Model):
         verbose_name = "活动"
         verbose_name_plural = verbose_name
 
+    def __str__(self):
+        return self.title
+
 
 class ActionComment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="用户")
@@ -169,3 +172,4 @@ class Num(models.Model):
     class Meta:
         verbose_name = "数据统计"
         verbose_name_plural = verbose_name
+
