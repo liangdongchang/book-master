@@ -618,11 +618,11 @@ def create_book(request, ):
 
 
 # celery测试
-from user.task import start_running
-
-
-def celery_test(request):
-    print('>=====开始发送请求=====<')
-    start_running.delay('发送短信')
-    # start_running.apply_async(('发送短信',), countdown=10)  # 10秒后再执行异步任务
-    return HttpResponse('<h2> 请求已发送 </h2>')
+# from user.task import start_running
+#
+#
+# def celery_test(request):
+#     print('>=====开始发送请求=====<')
+#     start_running.delay('发送短信')
+#     # start_running.apply_async(('发送短信',), countdown=10)  # 10秒后再执行异步任务
+#     return HttpResponse('<h2> 请求已发送 </h2>')

@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     #django_celery_beat应用
-    'django_celery_beat',
+    # 'django_celery_beat',
     # celery应用
-    'djcelery',
+    # 'djcelery',
 
     # 注册富文本应用
     'tinymce',
@@ -178,20 +178,20 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 
 # django-celery
-import djcelery
-
-djcelery.setup_loader()
-# 使用本地redis服务器中的0号数据库，redis密码为123456
-BROKER_URL = 'redis://:{}@127.0.0.1:6379/0'.format(REDIS_PASSWORD)
-CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
-CELERY_RESULT_BACKEND = 'redis://:{}@127.0.0.1:6379/1'.format(REDIS_PASSWORD)
-CELERY_ENABLE_UTC = False
-CELERY_TIMEZONE = 'Asia/Shanghai'
-CELERY_TASK_RESULT_EXPIRES = 10
-CELERYD_LOG_FILE = BASE_DIR + "/logs/celery/celery.log"
-CELERYBEAT_LOG_FILE = BASE_DIR + "/logs/celery/beat.log"
-CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
-
-DJANGO_CELERY_BEAT_TZ_AWARE = False
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+# import djcelery
+#
+# djcelery.setup_loader()
+# # 使用本地redis服务器中的0号数据库，redis密码为123456
+# BROKER_URL = 'redis://:{}@127.0.0.1:6379/0'.format(REDIS_PASSWORD)
+# CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+# CELERY_RESULT_BACKEND = 'redis://:{}@127.0.0.1:6379/1'.format(REDIS_PASSWORD)
+# CELERY_ENABLE_UTC = False
+# CELERY_TIMEZONE = 'Asia/Shanghai'
+# CELERY_TASK_RESULT_EXPIRES = 10
+# CELERYD_LOG_FILE = BASE_DIR + "/logs/celery/celery.log"
+# CELERYBEAT_LOG_FILE = BASE_DIR + "/logs/celery/beat.log"
+# CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+#
+# DJANGO_CELERY_BEAT_TZ_AWARE = False
+# CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
