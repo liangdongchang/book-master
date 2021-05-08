@@ -33,7 +33,7 @@ django-timezone-field==4.0
 django-tinymce==2.8.0
 djangorestframework==3.9.1
 dnspython==1.16.0
-eventlet==0.25.1
+eventlet==0.31.0
 greenlet==0.4.15
 idna==2.7
 importlib-metadata==1.5.0
