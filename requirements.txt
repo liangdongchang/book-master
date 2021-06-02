@@ -41,7 +41,7 @@ itypes==1.1.0
 Jinja2==2.11.1
 kombu==4.6.8
 Markdown==3.1.1
-markdown2==2.3.8
+markdown2==2.4.0
 MarkupSafe==1.1.1
 monotonic==1.5
 mysqlclient
