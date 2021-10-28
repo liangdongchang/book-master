@@ -39,7 +39,7 @@ urlpatterns = [
     path("kind/<int:kind_id>/", views.kind, name="kind"),  # 特定的标签
     path("week_reco/", views.reco_by_week, name="week_reco"),  # 周推荐
     path("monthitem/", views.reco_by_month, name="monthitem"),  # 月推荐
-    path("celery/", views.celery_test, name="celery_test"),  # celery测试
+    # path("celery/", views.celery_test, name="celery_test"),  # celery测试
     path("create_book/", views.create_book, name="create_book"),  # 创建书籍
 
 ]

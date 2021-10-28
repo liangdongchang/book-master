@@ -18,10 +18,14 @@
 
 ## 2、创建虚拟环境
 
+<<<<<<< HEAD
 可以下载这个虚拟环境，[点我下载](链接：https://pan.baidu.com/s/1IA8UKCotYRobPZr0PjjHtg 
 提取码：1111)
 
 也可以按照以下方法创建
+=======
+注意python解析器最好使用3.6或者3.7的。
+>>>>>>> 2bb0b240a0a06e183faf5ff4cc6101b78693b641
 
 ```
 使用pycharm创建虚拟环境
@@ -38,6 +42,19 @@
 pip install -r requirements.txt
 
 ```
+
+启动项目后可能出现的错误:
+
+```
+raise ImproperlyConfigured('mysqlclient 1.3.13 or newer is required; you have %s.' % Database.__version__)
+django.core.exceptions.ImproperlyConfigured: mysqlclient 1.3.13 or newer is required; you have 0.9.2.
+```
+
+解决方案，找到安装的django，django->db->base.py注释掉36、37行
+
+![1618153044696](image\1618153044696.png)
+
+
 
 ## 4、创建表数据迁移
 
