@@ -41,4 +41,5 @@ urlpatterns = [
     path("monthitem/", views.reco_by_month, name="monthitem"),  # 月推荐
     path("celery/", views.celery_test, name="celery_test"),  # celery测试
     path("create_book/", views.create_book, name="create_book"),  # 创建书籍
+
 ]
