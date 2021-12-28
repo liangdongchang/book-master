@@ -13,28 +13,22 @@ contrib==0.3.0
 coreapi==2.3.3
 coreschema==0.0.4
 cryptography==2.3.1
-<<<<<<< HEAD
 cycler==0.10.0
 defusedxml==0.7.1
 diff-match-patch==20200713
-=======
->>>>>>> 2bb0b240a0a06e183faf5ff4cc6101b78693b641
 Django==2.2.7
 django-appconf==1.0.3
 django-bootstrap-toolkit==2.15.0
+
 
 django-compressor==2.2
 django-contrib-comments==1.9.2
 django-crispy-forms==1.11.2
 django-crontab==0.7.1
 django-filter==2.1.0
-<<<<<<< HEAD
 django-filters==0.2.1
 django-formtools==2.3
 django-import-export==2.5.0
-=======
-
->>>>>>> 2bb0b240a0a06e183faf5ff4cc6101b78693b641
 django-jsonfield==1.0.1
 django-markdown-deux==1.0.5
 django-model-utils==3.1.2
@@ -68,13 +62,9 @@ MarkupSafe==1.1.1
 matplotlib==3.2.2
 mod-wsgi @ file:///D:/pythonpro/sideline/book_master/mod_wsgi-4.7.1-cp36-cp36m-win_amd64.whl
 monotonic==1.5
-<<<<<<< HEAD
 mysqlclient==1.3.14
 numpy==1.19.5
 odfpy==1.4.1
-=======
-mysqlclient
->>>>>>> 2bb0b240a0a06e183faf5ff4cc6101b78693b641
 openapi-codec==1.3.2
 openpyxl==3.0.7
 Pillow==6.2.0
@@ -97,7 +87,6 @@ tablib==3.0.0
 uritemplate==3.0.1
 urllib3==1.25.8
 vine==1.3.0
-xadmin-django
 wincertstore==0.2
 xadmin-django==3.0.1
 xlrd==2.0.1
