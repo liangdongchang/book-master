@@ -41,7 +41,7 @@ django-simple-captcha==0.5.9
 django-simpleui==2.1
 django-timezone-field==4.0
 django-tinymce==2.8.0
-djangorestframework==3.9.1
+djangorestframework==3.11.2
 dnspython==1.16.0
 et-xmlfile==1.0.1
 eventlet==0.25.1
