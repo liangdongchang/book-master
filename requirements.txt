@@ -47,7 +47,7 @@ et-xmlfile==1.0.1
 eventlet==0.25.1
 future==0.18.2
 greenlet==0.4.15
-httplib2==0.9.2
+httplib2==0.19.0
 idna==2.7
 importlib-metadata==1.6.1
 itypes==1.1.0
