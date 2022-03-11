@@ -18,9 +18,6 @@
 
 ## 2、创建虚拟环境
 
-可以下载这个虚拟环境，[点我下载](链接：https://pan.baidu.com/s/1IA8UKCotYRobPZr0PjjHtg 
-提取码：1111)
-
 也可以直接使用`pro_venv`文件夹中的虚拟环境。
 
 
