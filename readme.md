@@ -60,10 +60,17 @@ django.core.exceptions.ImproperlyConfigured: mysqlclient 1.3.13 or newer is requ
 ```
 打开pycharm左上角的Tools->Run manage.py Task
 依次输入命令
-makemigrations
 migrate
 
 ```
+
+**注：**如果报错：`ImportError: Couldn’t import Django. Are you sure it’s installed and available on your PYTHONPATH environment variable? Did you forget to activate a virtual environment?`
+
+解决方案如下：使用虚拟环境的python.exe的绝对路径执行：
+
+`D:\pythonpro\venv\book-master\Scripts\python.exe manage.py migrate`
+
+
 
 等数据迁移完成后，创建超级管理员用于登录后台管理系统
 
@@ -72,6 +79,16 @@ migrate
 输入命令
 createsuperuser
 ```
+
+自行设置后台超级管理员账号与密码，后面登录时需要用到。
+
+
+
+注：如果有以上报错，则执行：
+
+`D:\pythonpro\venv\book-master\Scripts\python.exe manage.py createsuperuser`
+
+
 
 ## 5、上架图书
 
