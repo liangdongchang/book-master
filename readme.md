@@ -1,7 +1,13 @@
 # 毕业设计--基于Django的图书推荐系统和论坛
 【联系方式：微信 1257309054】
 
-[demo](http://book.qsxbc.com/ )
+[demo1传送门](http://book.qsxbc.com/ )
+
+[demo2传送门](http://newbook.qsxbc.com/)
+
+[详细讲解传送门](https://liangdongchang.blog.csdn.net/article/details/124071363)
+
+
 
 demo上线购物车功能、购物清单、立即支付、添加购物车、查看已支付、待收货、已收货功能。
 
