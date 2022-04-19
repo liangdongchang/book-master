@@ -26,14 +26,25 @@ demo上线购物车功能、购物清单、立即支付、添加购物车、查�
 
 ## 2、创建虚拟环境
 
-也可以直接使用`pro_venv`文件夹中的虚拟环境。
+注意python解析器最好使用**3.6.6**的。
 
 
 
-也可以按照以下方法创建
-=======
-注意python解析器最好使用3.6.6的。
+#### 2.1 方式1：直接使用`pro_venv`文件夹中的虚拟环境。
 
+先把`pro_venv`中的`book-master`解压到当前文件夹。
+
+然后pycharm打开项目。
+
+左上角`File->settings->project:book-master->Python Interpreter->右上角设置小齿轮->Add->选中pro_venv\book-master\Scripts\python.exe`
+
+如图：
+
+![image-20220419124746089](image\虚拟环境配置.png)
+
+
+
+#### 2.2 方式2：可以按照以下方法创建
 ```
 使用pycharm创建虚拟环境
 打开pycharm,依次点击左上角File->settings->Project:book-master->Project Interpreter
@@ -41,7 +52,7 @@ demo上线购物车功能、购物清单、立即支付、添加购物车、查�
 
 ![1583056468304](image/1583056468304.png)
 
-## 3、安装依赖库
+创建好后，激活虚拟环境，然后安装第三方库：
 
 ```
 打开Pycharm左下角的Terminal
@@ -49,6 +60,81 @@ demo上线购物车功能、购物清单、立即支付、添加购物车、查�
 pip install -r requirements.txt
 
 ```
+
+
+
+## 3、数据迁移
+
+### 3.1 创建表
+
+打开Pycharm左下角的Terminal：
+![image-20220419130245813](image\已激活虚拟环境.png)
+
+有括号，直接运行命令：
+
+```
+python manage.py migrate
+```
+
+如果 没有括号，则说明虚拟环境没有激活。
+
+先把`pro_venv`中的`book-master`解压到当前文件夹(如果上面已经解压则无须再解压)，使用命令：
+
+```
+D:\pythonpro\git\book-master\pro_venv\book-master\Scripts\python.exe manage.py migrate
+```
+
+其中`D:\pythonpro\git\book-master`改为你的目录。
+
+**注：**如果报错：`ImportError: Couldn’t import Django. Are you sure it’s installed and available on your PYTHONPATH environment variable? Did you forget to activate a virtual environment?`
+
+解决方案如下：使用虚拟环境的python.exe的绝对路径执行。
+
+`D:\pythonpro\git\book-master\pro_venv\book-master\Scripts\python.exe manage.py migrate`
+
+
+
+### 3.2 创建缓存表
+
+```
+python manage.py createcachetable
+```
+
+
+
+### 3.3 创建超级管理员
+
+等数据迁移完成后，创建超级管理员用于登录后台管理系统：
+
+```
+python manage.py createsuperuser
+```
+
+自行设置后台超级管理员账号与密码，后面登录时需要用到。
+
+
+
+## 4、启动项目
+
+```
+打开Pycharm左下角的Terminal
+输入命令
+python manage.py runserver
+```
+
+![image-20220419125628274](image\激活虚拟环境.png)
+
+如果没有出现括号，则说明虚拟环境 激活失败，这时候只能使用绝对路径来启动项目：
+
+先把`pro_venv`中的`book-master`解压到当前文件夹(如果上面已经解压则无须再解压)，使用命令启动：
+
+```
+打开Pycharm左下角的Terminal
+输入命令
+D:\pythonpro\git\book-master\pro_venv\book-master\Scripts\python.exe manage.py runserver
+```
+
+其中`D:\pythonpro\git\book-master`改为你的目录。
 
 启动项目后可能出现的错误:
 
@@ -63,44 +149,7 @@ django.core.exceptions.ImproperlyConfigured: mysqlclient 1.3.13 or newer is requ
 
 
 
-## 4、创建表数据迁移
-
-```
-打开pycharm左上角的Tools->Run manage.py Task
-依次输入命令
-migrate
-
-```
-
-**注：**如果报错：`ImportError: Couldn’t import Django. Are you sure it’s installed and available on your PYTHONPATH environment variable? Did you forget to activate a virtual environment?`
-
-解决方案如下：使用虚拟环境的python.exe的绝对路径执行：
-
-`D:\pythonpro\venv\book-master\Scripts\python.exe manage.py migrate`
-
-
-
-等数据迁移完成后，创建超级管理员用于登录后台管理系统
-
-```
-打开pycharm左上角的Tools->Run manage.py Task
-输入命令
-createsuperuser
-```
-
-自行设置后台超级管理员账号与密码，后面登录时需要用到。
-
-
-
-注：如果有以上报错，则执行：
-
-`D:\pythonpro\venv\book-master\Scripts\python.exe manage.py createsuperuser`
-
-
-
 ## 5、上架图书
-
-方式一：
 
 ```
 打开Pycharm左下角的Terminal
@@ -121,10 +170,6 @@ http://127.0.0.1:8000/admin/
 ![1583057347009](image/1583057347009.png)
 
 
-
-方式二：
-
-也可以直接运行book.sql中的语句直接新增书籍。
 
 
 
