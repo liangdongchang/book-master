@@ -1,13 +1,19 @@
 # 毕业设计--基于Django的图书推荐系统和论坛
-【联系方式：微信 1257309054】
+【**联系方式：微信 1257309054**】
+
+
+
+### 注意
+
+**如果有图片显示问题，可以下载`readme.pdf`查看。**
+
+
 
 [demo1传送门](http://book.qsxbc.com/ )
 
 [demo2传送门](http://newbook.qsxbc.com/)
 
 [详细讲解传送门](https://liangdongchang.blog.csdn.net/article/details/124071363)
-
-
 
 demo上线购物车功能、购物清单、立即支付、添加购物车、查看已支付、待收货、已收货功能。
 
@@ -16,6 +22,8 @@ demo上线借阅图书功能。
 demo增加基于物品推荐协同过滤功能。
 
 拉取项目后，启动项目步骤如下
+
+
 
 ## 1、修改book/settings.py中的数据库名称
 
