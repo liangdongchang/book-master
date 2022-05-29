@@ -44,7 +44,7 @@ demo增加基于物品推荐协同过滤功能。
 
 如图：
 
-![image-20220419124746089](image\虚拟环境配置.png)
+![image-20220419124746089](image\xn.png)
 
 
 
@@ -55,7 +55,7 @@ demo增加基于物品推荐协同过滤功能。
 ### 3.1 创建表
 
 打开Pycharm左下角的Terminal：
-![image-20220419130245813](image\已激活虚拟环境.png)
+![image-20220419130245813](image\jh.png)
 
 有括号，直接运行命令：
 
@@ -109,7 +109,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-![image-20220419125628274](image\激活虚拟环境.png)
+![image-20220419125628274](image\jhxn.png)
 
 如果没有出现括号，则说明虚拟环境 激活失败，这时候只能使用绝对路径来启动项目：
 
@@ -132,7 +132,7 @@ django.core.exceptions.ImproperlyConfigured: mysqlclient 1.3.13 or newer is requ
 
 解决方案，找到安装的django，django->db->base.py注释掉36、37行
 
-![1618153044696](image\1618153044696.png)
+![1618153044696](image\zs.png)
 
 
 
@@ -192,7 +192,7 @@ http://127.0.0.1:8000/
 
 ### 界面
 
-![1584710625859](image/界面.png)
+![1584710625859](image/jm.png)
 
 ### 注册和登录
 
@@ -212,7 +212,7 @@ http://127.0.0.1:8000/
 
 ### 论坛
 
-![1584711445272](image/论坛.png)
+![1584711445272](image/lt.png)
 
 
 
@@ -234,7 +234,7 @@ http://127.0.0.1:8000/
 
 如果是解压redis到其它文件夹，则使用文本打开【启动redis.bat】，然后修改启动路径
 
-![1583568620010](image/启动redis.png)
+![1583568620010](image/redis.png)
 
 
 
