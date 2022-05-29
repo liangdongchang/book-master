@@ -2,7 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+.gitignore
 # C extensions
 *.so
 
@@ -113,6 +113,7 @@ venv.bak/
 # Spyder project settings
 .spyderproject
 .spyproject
+.idea
 
 # Rope project settings
 .ropeproject
