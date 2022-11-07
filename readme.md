@@ -63,13 +63,13 @@ demo增加基于物品推荐协同过滤功能。
 
 在D盘创建一个文件夹`my_work`，把从gitee拉取的项目直接解压到当前文件夹下：如图所示：
 
-![image-20221108000706981](D:\pythonpro\git\book-master\image\解压.png)
+![image-20221108000706981](image/解压.png)
 
 
 
 解压`pro_venv`中的虚拟环境`book_master`到该目录下：
 
-![image-20221108002618882](D:\pythonpro\git\book-master\image\虚拟环境目录.png)
+![image-20221108002618882](image/虚拟环境目录.png)
 
 
 
@@ -89,7 +89,7 @@ demo增加基于物品推荐协同过滤功能。
 ### 3.1 创建表
 
 打开Pycharm左下角的Terminal：
-![image-20221108003005193](D:\pythonpro\git\book-master\image\jh.png)
+![image-20221108003005193](image/jh.png)
 
 使用命令：
 
@@ -127,7 +127,7 @@ D:\my_work\book-master-master\pro_venv\book-master\Scriptspython.exe manage.py c
 D:\my_work\book-master-master\pro_venv\book-master\Scriptspython.exe manage.py runserver
 ```
 
-![image-20221108003326726](D:\pythonpro\git\book-master\image\jhxn.png)
+![image-20221108003326726](image/jhxn.png)
 
 
 
@@ -156,7 +156,7 @@ http://127.0.0.1:8000/admin/
 http://127.0.0.1:8000/
 ```
 
-![image-20221108004143871](D:\pythonpro\git\book-master\image\用户界面.png)
+![image-20221108004143871](image/用户界面.png)
 
 至此，整个项目运行完成
 
@@ -199,9 +199,7 @@ http://127.0.0.1:8000/admin/
 
 ### 注册和登录
 
-
-
-![注册](./image/register.png)
+![注册](image/register.png)
 
 
 
@@ -209,7 +207,7 @@ http://127.0.0.1:8000/admin/
 
 
 
-![](./image/mdwxj.png)
+![](image/mdwxj.png)
 
 
 
@@ -223,7 +221,7 @@ http://127.0.0.1:8000/admin/
 
 
 
-![周推荐](./image/ztj.png)
+![周推荐](image/ztj.png)
 
 
 
