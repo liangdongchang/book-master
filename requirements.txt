@@ -12,7 +12,7 @@ chardet==3.0.4
 contrib==0.3.0
 coreapi==2.3.3
 coreschema==0.0.4
-cryptography==2.3.1
+cryptography==39.0.1
 cycler==0.10.0
 defusedxml==0.7.1
 diff-match-patch==20200713
