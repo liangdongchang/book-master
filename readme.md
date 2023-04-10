@@ -94,7 +94,7 @@ demo增加基于物品推荐协同过滤功能。
 使用命令：
 
 ```
-D:\my_work\book-master-master\pro_venv\book-master\Scriptspython.exe manage.py migrate
+D:\my_work\book-master-master\pro_venv\book-master\Scripts\python.exe manage.py migrate
 ```
 
 
@@ -102,7 +102,7 @@ D:\my_work\book-master-master\pro_venv\book-master\Scriptspython.exe manage.py m
 ### 3.2 创建缓存表
 
 ```
-D:\my_work\book-master-master\pro_venv\book-master\Scriptspython.exe manage.py createcachetable
+D:\my_work\book-master-master\pro_venv\book-master\Scripts\python.exe manage.py createcachetable
 ```
 
 
@@ -112,7 +112,7 @@ D:\my_work\book-master-master\pro_venv\book-master\Scriptspython.exe manage.py c
 等数据迁移完成后，创建超级管理员用于登录后台管理系统：
 
 ```
-D:\my_work\book-master-master\pro_venv\book-master\Scriptspython.exe manage.py createsuperuser
+D:\my_work\book-master-master\pro_venv\book-master\Scripts\python.exe manage.py createsuperuser
 ```
 
 设置超级管理员账号【root】，密码【book-root】后面登录时需要用到。
@@ -124,7 +124,7 @@ D:\my_work\book-master-master\pro_venv\book-master\Scriptspython.exe manage.py c
 打开Pycharm左下角的Terminal，输入命令：
 
 ```
-D:\my_work\book-master-master\pro_venv\book-master\Scriptspython.exe manage.py runserver
+D:\my_work\book-master-master\pro_venv\book-master\Scripts\python.exe manage.py runserver
 ```
 
 ![image-20221108003326726](image/jhxn.png)

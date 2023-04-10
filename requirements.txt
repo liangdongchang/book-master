@@ -26,7 +26,6 @@ django-contrib-comments==1.9.2
 django-crispy-forms==1.11.2
 django-crontab==0.7.1
 django-filter==2.1.0
-django-filters==0.2.1
 django-formtools==2.3
 django-import-export==2.5.0
 django-jsonfield==1.0.1
