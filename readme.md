@@ -29,9 +29,9 @@
 
 ### demo
 
-[demo1传送门](http://book.qsxbc.com/ )
+[成品效果点我展示demo1传送门](http://book.qsxbc.com/ )
 
-[demo2传送门](http://newbook.qsxbc.com/)
+[成品效果点我展示demo2传送门](http://newbook.qsxbc.com/)
 
 [详细讲解传送门](https://liangdongchang.blog.csdn.net/article/details/124071363)
 
@@ -51,15 +51,33 @@ demo增加基于物品推荐协同过滤功能。
 
 
 
-拉取项目后，启动项目步骤如下
+拉取项目后，启动项目步骤如下。
 
 
 
-## 1、 拉取项目，创建虚拟环境
+## 1、安装python
 
 **注意**：python解析器最好使用**3.6.6**版本的。
 
+双击本目录下的`python3.6.6.exe`,如下图安装：
 
+1、选择customize,最好也勾选`Add python3.6toPATH`
+
+![image-20230423012027520](image\安装python.png)
+
+2、点击next
+
+3、选择for all users
+
+![image-20230423011108561](image\foralluser.png)
+
+4、选择继续即可，安装成功如下：
+
+![image-20230423011249290](image\成功.png)
+
+### 
+
+## 2、拉取项目，创建虚拟环境
 
 在D盘创建一个文件夹`my_work`，把从gitee拉取的项目直接解压到当前文件夹下：如图所示：
 
@@ -73,7 +91,7 @@ demo增加基于物品推荐协同过滤功能。
 
 
 
-## 2、修改book/settings.py中的数据库名称
+## 3、修改book/settings.py中的数据库名称
 
 ```
 先在本地mysql创建一个名为book_master的数据库
@@ -84,9 +102,9 @@ demo增加基于物品推荐协同过滤功能。
 
 
 
-## 3、数据迁移
+## 4、数据迁移
 
-### 3.1 创建表
+### 4.1 创建表
 
 打开Pycharm左下角的Terminal：
 ![image-20221108003005193](image/jh.png)
@@ -99,7 +117,7 @@ D:\my_work\book-master-master\pro_venv\book-master\Scripts\python.exe manage.py 
 
 
 
-### 3.2 创建缓存表
+### 4.2 创建缓存表
 
 ```
 D:\my_work\book-master-master\pro_venv\book-master\Scripts\python.exe manage.py createcachetable
@@ -107,7 +125,7 @@ D:\my_work\book-master-master\pro_venv\book-master\Scripts\python.exe manage.py 
 
 
 
-### 3.3 创建超级管理员
+### 4.3 创建超级管理员
 
 等数据迁移完成后，创建超级管理员用于登录后台管理系统：
 
@@ -119,7 +137,7 @@ D:\my_work\book-master-master\pro_venv\book-master\Scripts\python.exe manage.py 
 
 
 
-## 4、启动项目
+## 5、启动项目
 
 打开Pycharm左下角的Terminal，输入命令：
 
@@ -131,7 +149,7 @@ D:\my_work\book-master-master\pro_venv\book-master\Scripts\python.exe manage.py 
 
 
 
-## 5、上架图书
+## 6、上架图书
 
 然后打开谷歌浏览器，输入地址：
 
@@ -148,7 +166,7 @@ http://127.0.0.1:8000/admin/
 
 
 
-## 6、进入用户访问界面
+## 7、进入用户访问界面
 
 打开浏览器，输入地址:
 
@@ -162,7 +180,7 @@ http://127.0.0.1:8000/
 
 
 
-## 7、进入后台管理界面
+## 8、进入后台管理界面
 
 打开浏览器，输入地址：
 
