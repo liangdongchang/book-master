@@ -63,17 +63,17 @@ demo增加基于物品推荐协同过滤功能。
 
 1、选择customize,最好也勾选`Add python3.6toPATH`
 
-![image-20230423012027520](image\安装python.png)
+![image-20230423012027520](image/安装python.png)
 
 2、点击next
 
 3、选择for all users
 
-![image-20230423011108561](image\foralluser.png)
+![image-20230423011108561](image/foralluser.png)
 
 4、选择继续即可，安装成功如下：
 
-![image-20230423011249290](image\成功.png)
+![image-20230423011249290](image/成功.png)
 
 ### 
 
